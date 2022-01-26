@@ -69,11 +69,6 @@ class TextGenerator:
         with open(filename) as inputFile:
             text = inputFile.read()
 
-        # text = """Hello this is "Test"! 😁😊 World
-
-        # Hello this I'm "is2 Test!" World2🌷🌸💐
-        # Hello this is another `Test`World3"""
-
         words = text.split()  # Extracting the list of words
         numWords = len(words)  # Number of words in the file
 
