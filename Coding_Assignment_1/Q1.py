@@ -74,7 +74,7 @@ def main():
     plt.plot(xpoints, lhs, "g", lw="3", label="log(n!)")
 
     # Plotting n vs log(stirling(n))
-    plt.plot(xpoints, rhs, "r", lw="1.5", label="log(stirling(n))")
+    plt.plot(xpoints, rhs, "--r", lw="1.5", label="log(stirling(n))")
 
     # Displaying the plot
     plt.legend()
