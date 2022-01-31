@@ -9,6 +9,7 @@ from sys import maxsize as INF
 import matplotlib.pyplot as plt
 from random import random
 from math import log
+from queue import Queue
 from numpy import linspace
 
 
@@ -209,18 +210,19 @@ class UndirectedGraph:
         plt.show()  # Displaying the graph
 
     @handleError
-    def _bfsHelper(self, sv, visited):
+    def _isConnectedHelper(self, sv, visited):
         """
         BFS Helper function that runs BFS from a given starting node.\n
         `visited` list is to keep track of which all nodes are visited till now in the BFS
         """
-        q = [sv]  # queue data structure
+        q = Queue()  # queue data structure
+        q.put(sv)  # Adding the starting vertex to the queue
         visited[sv] = True  # Marking the starting vertex as visited
-        while len(q) != 0:  # While the queue is not empty
-            u = q.pop(0)  # Pop the first element from the queue
+        while not q.empty():  # While the queue is not empty
+            u = q.get()  # Pop the first element from the queue
             for v in self.gr[u]:  # Visit all the neighbours of the popped out node
                 if not visited[v]:  # If that neighbour is not visited
-                    q.append(v)  # Push it into the queue
+                    q.put(v)  # Push it into the queue
                     visited[v] = True  # Mark it as visited
 
     @handleError
@@ -235,7 +237,7 @@ class UndirectedGraph:
         # Looping all the nodes of the graph
         for i in range(1, self.numNodes + 1):
             if not visited[i]:  # If the node is not visited, start BFS from it
-                self._bfsHelper(i, visited)  # Executing BFS from the found node
+                self._isConnectedHelper(i, visited)  # Executing BFS from the found node
                 numComponents += 1  # Incrementing the number of connected components by
                 if numComponents > 1:  # If the number of connected components is > 1
                     return False
@@ -271,9 +273,9 @@ class ERRandomGraph(UndirectedGraph):
                     self.addEdge(i, j)
 
     @handleError
-    def isConnected(self):
+    def verifyERConnectednessStatement(self):
         """
-        Verifies the Erdos-Renyi model that the graph G(n, p) is almost surely connected only if `p > log(n) / n`
+        Verifies and visualizes the Erdos-Renyi model that the graph G(n, p) is almost surely connected only if `p > log(n) / n`
         """
         # The theoretical threshold which is `log(n) / n`
         theoretical_threshold = log(self.numNodes) / self.numNodes
@@ -289,7 +291,7 @@ class ERRandomGraph(UndirectedGraph):
             # Generating G(n, p) `numRuns` times
             for _ in range(numRuns):
                 self.sample(p)  # Sampling a random graph
-                if super().isConnected():  # Checking if it is connected
+                if self.isConnected():  # Checking if it is connected
                     count += 1  # Incrementing the count
 
             # fraction of runs G(n, p) is connected
@@ -300,7 +302,7 @@ class ERRandomGraph(UndirectedGraph):
             "Connectedness of a G({n}, p) as function of p".format(n=self.numNodes)
         )
         plt.xlabel("p")
-        plt.ylabel("fraction of runs G(100, {n}) is connected".format(n=self.numNodes))
+        plt.ylabel("fraction of runs G({n}, p) is connected".format(n=self.numNodes))
 
         # Removing the margins from the y-axis
         plt.margins(y=0)
@@ -337,6 +339,6 @@ if __name__ == "__main__":
 
     # Sample Test Case 3
     g = ERRandomGraph(100)
-    print("The above plot shows correctedness average over 100 runs")
-    print("Execution Time on my PC: 15 seconds")
-    g.isConnected()
+    g.verifyERConnectednessStatement()
+    # The above plot shows correctedness average over 100 runs
+    # Execution Time on my PC: 15 seconds
