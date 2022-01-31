@@ -279,11 +279,12 @@ class ERRandomGraph(UndirectedGraph):
         """
         # The theoretical threshold which is `log(n) / n`
         theoretical_threshold = log(self.numNodes) / self.numNodes
-        numRuns = 100  # Number of runs executed for each probability
+        numRuns = 1000  # Number of runs executed for each probability
         minP = 0  # Minimum probability
         maxP = theoretical_threshold * 3  # Just a random number
         # Generating probability points range from [minP, maxP]
-        prob = list(linspace(minP, maxP, numRuns))
+        numProbPoints = 50  # Number of probability points generated
+        prob = list(linspace(minP, maxP, numProbPoints))
         # fraction of runs G(n, p) is connected for each probability
         fracConnected = []
         for p in prob:
