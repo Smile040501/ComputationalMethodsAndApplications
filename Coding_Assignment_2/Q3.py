@@ -307,11 +307,11 @@ class ERRandomGraph(UndirectedGraph):
         # Removing the margins from the y-axis
         plt.margins(y=0)
 
-        # Plotting the theoretical threshold as a vertical line
-        plt.axvline(x=theoretical_threshold, color="r", label="Theoretical threshold")
-
         # Plotting the curve for `fracConnected vs prob`
         plt.plot(prob, fracConnected, color="b")
+
+        # Plotting the theoretical threshold as a vertical line
+        plt.axvline(x=theoretical_threshold, color="r", label="Theoretical threshold")
         # Plotting the grid lines
         plt.grid()
         # Plotting the legend box
