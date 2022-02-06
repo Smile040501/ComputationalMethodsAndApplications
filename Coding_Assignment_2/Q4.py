@@ -455,3 +455,5 @@ if __name__ == "__main__":
     # Sample Test Case 3
     g = ERRandomGraph(1000)
     g.verifyERGiantComponentStatement()
+    # The above plot shows size of the larges and the second-largest components average over 50 runs for 50 number of probability points on x-axis
+    # Execution Time on my PC: 3 minutes approx.

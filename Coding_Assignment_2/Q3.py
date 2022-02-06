@@ -341,5 +341,5 @@ if __name__ == "__main__":
     # Sample Test Case 3
     g = ERRandomGraph(100)
     g.verifyERConnectednessStatement()
-    # The above plot shows correctedness average over 100 runs
-    # Execution Time on my PC: 15 seconds
+    # The above plot shows correctedness average over 1000 runs for 50 number of probability points on x-axis
+    # Execution Time on my PC: 3 minutes approx.
