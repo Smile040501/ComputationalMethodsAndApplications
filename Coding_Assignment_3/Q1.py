@@ -58,6 +58,9 @@ class RowVectorFloat:
             raise Exception(
                 f"Invalid type of index received {type(index)}.\nExpected int."
             )
+        n = len(self.vec)
+        if index >= n or index < (-n):
+            raise Exception(f"Index out of range.")
         return True
 
     @handleError
