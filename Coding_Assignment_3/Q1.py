@@ -5,9 +5,6 @@ Coding Assignment 3 - Q1
 """
 
 # %%
-import numpy as np
-
-
 def handleError(method):
     """
     Decorator Factory function.
@@ -71,15 +68,17 @@ class RowVectorFloat:
         if not self._validateListValues(lst):
             return
 
-        # Using numpy array to store the values
-        self.vec = np.array(lst)
+        # Creating a new copy of the list
+        self.vec = list(lst)
 
     @handleError
     def __str__(self):
         """
         Returns the string representation of the row vector.
         """
-        return " ".join(str(i) for i in self.vec)
+        return " ".join(
+            f"{i:.2f}" if isinstance(i, float) else str(i) for i in self.vec
+        )
 
     @handleError
     def __len__(self):
@@ -119,8 +118,8 @@ class RowVectorFloat:
         elif len(self) != len(rv):
             raise Exception("Invalid input - Expected same length vectors")
 
-        ans = self.vec + rv.vec
-        return RowVectorFloat(ans.tolist())
+        ans = [self.vec[i] + rv.vec[i] for i in range(len(self))]
+        return RowVectorFloat(ans)
 
     @handleError
     def __radd__(self, rv):
@@ -138,8 +137,8 @@ class RowVectorFloat:
         """
         if not isinstance(scalar, (int, float)):
             raise Exception("Invalid input - Expected scalar")
-        ans = self.vec * scalar
-        return RowVectorFloat(ans.tolist())
+        ans = [self.vec[i] * scalar for i in range(len(self))]
+        return RowVectorFloat(ans)
 
     @handleError
     def __rmul__(self, scalar):
