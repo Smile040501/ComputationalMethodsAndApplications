@@ -6,11 +6,17 @@ name = "pypi"
 [packages]
 matplotlib = "*"
 networkx = {extras = ["default"], version = "*"}
+numpy = "*"
+scipy = "*"
+ipython = "*"
+jupyter = "*"
+pandas = "*"
+sympy = "*"
+nose = "*"
 
 [dev-packages]
 pylint = "*"
 black = "*"
-jupyter = "*"
 
 [requires]
 python_version = "3.8"
