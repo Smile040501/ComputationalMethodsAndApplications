@@ -13,6 +13,7 @@ jupyter = "*"
 pandas = "*"
 sympy = "*"
 nose = "*"
+ipympl = "*"
 
 [dev-packages]
 pylint = "*"
