@@ -14,7 +14,6 @@ pandas = "*"
 sympy = "*"
 nose = "*"
 ipympl = "*"
-pillow = "*"
 
 [dev-packages]
 pylint = "*"
